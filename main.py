@@ -33,12 +33,9 @@ while score < 50:
     if score == 0:
         answer_state = (screen.textinput(title="Guess the State", prompt="Whats a state name?"))
         if answer_state == None:
-            missing_states = []
-            for state in all_states:
-                if state not in correct_answers:
-                    missing_states.append(state)
-                    missing_data = pandas.DataFrame(missing_states)
-                    missing_data.to_csv("states_to_learn.csv")
+            missing_states = [state for state in all_states if state not in correct_answers]
+            missing_data = pandas.DataFrame(missing_states)
+            missing_data.to_csv("states_to_learn.csv")
             sys.exit()
     else:
         answer_state = (screen.textinput(title=f"{score}/50 States Correct", prompt="whats another state name?"))
